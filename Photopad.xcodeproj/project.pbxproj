@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D899B17E1B8090A500299F0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D899B17D1B8090A500299F0F /* AppDelegate.swift */; };
-		D899B1801B8090A500299F0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D899B17F1B8090A500299F0F /* ViewController.swift */; };
 		D899B1831B8090A500299F0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D899B1811B8090A500299F0F /* Main.storyboard */; };
 		D899B1851B8090A500299F0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D899B1841B8090A500299F0F /* Images.xcassets */; };
 		D899B1881B8090A500299F0F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D899B1861B8090A500299F0F /* LaunchScreen.xib */; };
 		D899B1941B8090A500299F0F /* PhotopadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D899B1931B8090A500299F0F /* PhotopadTests.swift */; };
+		D899B19E1B8092D900299F0F /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D899B19D1B8092D900299F0F /* PhotosTableViewController.swift */; };
+		D8AB4AE61B809D8D00E50D02 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4AE51B809D8D00E50D02 /* PhotoViewController.swift */; };
+		D8AB4AE81B80A21D00E50D02 /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4AE71B80A21D00E50D02 /* PhotoRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +31,15 @@
 		D899B1781B8090A500299F0F /* Photopad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photopad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D899B17C1B8090A500299F0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D899B17D1B8090A500299F0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D899B17F1B8090A500299F0F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D899B1821B8090A500299F0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D899B1841B8090A500299F0F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D899B1871B8090A500299F0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D899B18D1B8090A500299F0F /* PhotopadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotopadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D899B1921B8090A500299F0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D899B1931B8090A500299F0F /* PhotopadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotopadTests.swift; sourceTree = "<group>"; };
+		D899B19D1B8092D900299F0F /* PhotosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
+		D8AB4AE51B809D8D00E50D02 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		D8AB4AE71B80A21D00E50D02 /* PhotoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +81,11 @@
 		D899B17A1B8090A500299F0F /* Photopad */ = {
 			isa = PBXGroup;
 			children = (
+				D8AB4AE71B80A21D00E50D02 /* PhotoRepository.swift */,
+				D8AB4AE51B809D8D00E50D02 /* PhotoViewController.swift */,
+				D899B19D1B8092D900299F0F /* PhotosTableViewController.swift */,
 				D899B17D1B8090A500299F0F /* AppDelegate.swift */,
-				D899B17F1B8090A500299F0F /* ViewController.swift */,
 				D899B1811B8090A500299F0F /* Main.storyboard */,
-				D899B1841B8090A500299F0F /* Images.xcassets */,
-				D899B1861B8090A500299F0F /* LaunchScreen.xib */,
 				D899B17B1B8090A500299F0F /* Supporting Files */,
 			);
 			path = Photopad;
@@ -90,6 +94,8 @@
 		D899B17B1B8090A500299F0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D899B1841B8090A500299F0F /* Images.xcassets */,
+				D899B1861B8090A500299F0F /* LaunchScreen.xib */,
 				D899B17C1B8090A500299F0F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -212,8 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D899B1801B8090A500299F0F /* ViewController.swift in Sources */,
+				D899B19E1B8092D900299F0F /* PhotosTableViewController.swift in Sources */,
 				D899B17E1B8090A500299F0F /* AppDelegate.swift in Sources */,
+				D8AB4AE81B80A21D00E50D02 /* PhotoRepository.swift in Sources */,
+				D8AB4AE61B809D8D00E50D02 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +419,7 @@
 				D899B1991B8090A500299F0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D899B19A1B8090A500299F0F /* Build configuration list for PBXNativeTarget "PhotopadTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +428,7 @@
 				D899B19C1B8090A500299F0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
