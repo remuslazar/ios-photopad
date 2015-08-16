@@ -1,49 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XRi-M7-eM4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AoR-Ie-2XL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Photos Table View Controller-->
-        <scene sceneID="EtF-JR-gKY">
-            <objects>
-                <tableViewController id="uVa-ie-umd" customClass="PhotosTableViewController" customModule="Photopad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lxE-xN-1Qy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="7qQ-aX-N28">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7qQ-aX-N28" id="XI5-iA-m4w">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="AoR-Ie-2XL" kind="show" identifier="Show Photo" id="whR-cW-Ltp"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="uVa-ie-umd" id="Gc1-qt-NNP"/>
-                            <outlet property="delegate" destination="uVa-ie-umd" id="1dA-oe-hQG"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="43S-qQ-0Ih">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="flO-3Z-SiF">
-                            <connections>
-                                <segue destination="AoR-Ie-2XL" kind="show" id="OMt-Nv-uNO"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="cameraButton" destination="flO-3Z-SiF" id="CmM-UX-EIl"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0vu-Ji-1cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2122" y="1059"/>
-        </scene>
         <!--Photo View Controller-->
         <scene sceneID="Tvq-V2-iYb">
             <objects>
@@ -56,68 +17,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nZx-gL-cKV">
-                                <rect key="frame" x="0.0" y="137" width="600" height="463"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export to Camera Roll:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVp-jd-rFN">
-                                <rect key="frame" x="16" y="72" width="175" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="ypL-8D-t6j">
-                                <rect key="frame" x="16" y="101" width="568" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ypL-8D-t6j">
+                                <rect key="frame" x="16" y="72" width="568" height="29"/>
                                 <segments>
-                                    <segment title="Large (1280)"/>
-                                    <segment title="Medium (800)"/>
-                                    <segment title="Small (480)"/>
+                                    <segment title="Original"/>
+                                    <segment title="Large"/>
+                                    <segment title="Medium"/>
+                                    <segment title="Small"/>
                                 </segments>
                                 <connections>
                                     <action selector="exportImage:" destination="R5u-ug-e4E" eventType="valueChanged" id="FQQ-f9-3EK"/>
                                 </connections>
                             </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWu-Yo-5tx">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yo8-C7-def">
+                                        <rect key="frame" x="290" y="236" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Yo8-C7-def" secondAttribute="trailing" constant="290" id="2bM-9a-q0N"/>
+                                    <constraint firstAttribute="centerX" secondItem="Yo8-C7-def" secondAttribute="centerX" id="BTT-Lc-Yqn"/>
+                                    <constraint firstAttribute="centerY" secondItem="Yo8-C7-def" secondAttribute="centerY" id="URA-WL-wGo"/>
+                                    <constraint firstAttribute="bottom" secondItem="Yo8-C7-def" secondAttribute="bottom" constant="236" id="kDF-7H-zzw"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nZx-gL-cKV" firstAttribute="bottom" secondItem="rgJ-dc-pn4" secondAttribute="top" id="Ejg-uS-Dyx"/>
-                            <constraint firstItem="ypL-8D-t6j" firstAttribute="leading" secondItem="wVp-jd-rFN" secondAttribute="leading" id="Xcy-c2-dFM"/>
-                            <constraint firstAttribute="trailing" secondItem="nZx-gL-cKV" secondAttribute="trailing" id="ZWd-oR-C5K"/>
-                            <constraint firstItem="wVp-jd-rFN" firstAttribute="top" secondItem="bac-fc-8fo" secondAttribute="bottom" constant="8" symbolic="YES" id="aX1-WK-Rn7"/>
-                            <constraint firstItem="ypL-8D-t6j" firstAttribute="leading" secondItem="v6P-qX-9uY" secondAttribute="leadingMargin" id="aaK-vA-8tX"/>
-                            <constraint firstItem="nZx-gL-cKV" firstAttribute="top" secondItem="ypL-8D-t6j" secondAttribute="bottom" constant="8" symbolic="YES" id="eHG-LM-hWx"/>
-                            <constraint firstItem="ypL-8D-t6j" firstAttribute="top" secondItem="wVp-jd-rFN" secondAttribute="bottom" constant="8" symbolic="YES" id="eqI-Xd-dhZ"/>
-                            <constraint firstItem="nZx-gL-cKV" firstAttribute="leading" secondItem="v6P-qX-9uY" secondAttribute="leading" id="fQK-3s-kEL"/>
-                            <constraint firstItem="nZx-gL-cKV" firstAttribute="centerX" secondItem="ypL-8D-t6j" secondAttribute="centerX" id="rjh-ka-YJ6"/>
+                            <constraint firstItem="rgJ-dc-pn4" firstAttribute="top" secondItem="GWu-Yo-5tx" secondAttribute="bottom" id="BxW-9p-xI1"/>
+                            <constraint firstItem="GWu-Yo-5tx" firstAttribute="leading" secondItem="v6P-qX-9uY" secondAttribute="leading" id="LV8-TK-gWE"/>
+                            <constraint firstItem="ypL-8D-t6j" firstAttribute="top" secondItem="bac-fc-8fo" secondAttribute="bottom" constant="8" symbolic="YES" id="QsB-V3-6h2"/>
+                            <constraint firstAttribute="trailing" secondItem="GWu-Yo-5tx" secondAttribute="trailing" id="SEQ-7I-b29"/>
+                            <constraint firstItem="ypL-8D-t6j" firstAttribute="leading" secondItem="v6P-qX-9uY" secondAttribute="leadingMargin" id="cVD-WB-55j"/>
+                            <constraint firstItem="GWu-Yo-5tx" firstAttribute="top" secondItem="ypL-8D-t6j" secondAttribute="bottom" constant="8" symbolic="YES" id="icb-M7-r4A"/>
+                            <constraint firstItem="ypL-8D-t6j" firstAttribute="trailing" secondItem="v6P-qX-9uY" secondAttribute="trailingMargin" id="oiq-Jg-JJr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CpG-pu-U1b">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sv4-F7-KT6"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="xZg-rX-dUq">
+                            <connections>
+                                <action selector="selectAction:" destination="R5u-ug-e4E" id="iwh-cG-TPN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sv4-F7-KT6">
+                            <connections>
+                                <action selector="saveImage:" destination="R5u-ug-e4E" id="4CA-kv-j7M"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageView" destination="nZx-gL-cKV" id="aME-V6-S7l"/>
+                        <outlet property="imageSizeControl" destination="ypL-8D-t6j" id="Hgq-qd-AL1"/>
+                        <outlet property="saveButton" destination="Sv4-F7-KT6" id="LjA-5V-aGw"/>
+                        <outlet property="scrollView" destination="GWu-Yo-5tx" id="96h-5Q-zIR"/>
+                        <outlet property="spinner" destination="Yo8-C7-def" id="qiY-c5-DWS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQJ-o9-2Mm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3695" y="772"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pz2-wp-6Jk">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XRi-M7-eM4" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vvb-ny-aAo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="uVa-ie-umd" kind="relationship" relationship="rootViewController" id="1Ek-Dk-e28"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mjd-nV-Y2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1342" y="1059"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YDB-0z-VLg">
@@ -138,7 +97,4 @@
             <point key="canvasLocation" x="2883" y="772"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="whR-cW-Ltp"/>
-    </inferredMetricsTieBreakers>
 </document>
