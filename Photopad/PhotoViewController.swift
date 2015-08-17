@@ -50,11 +50,9 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if let image = convertedImage {
             let rect = AVMakeRectWithAspectRatioInsideRect(image.size, scrollView.bounds)
             let scale = rect.size.width / image.size.width
-            scrollView.zoomScale = scale
             scrollView.minimumZoomScale = scale
             scrollView.maximumZoomScale = max(1.0, scale)
-//            scrollView.contentOffset = CGPoint(x: (rect.width - scrollView.bounds.width) / 2,
-//                y: (rect.height - scrollView.bounds.height) / 2)
+            scrollView.zoomScale = scale
         }
     }
     
