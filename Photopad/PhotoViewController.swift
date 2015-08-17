@@ -109,7 +109,11 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 filter.setValue(1.0, forKey: "inputAspectRatio")
                 if let outputImage = filter.valueForKey("outputImage") as? CIImage {
                     let context = CIContext(options: nil)
-                    let scaledImage = UIImage(CGImage: context.createCGImage(outputImage, fromRect: outputImage.extent()))
+                    let scaledImage = UIImage(
+                        CGImage: context.createCGImage(outputImage, fromRect: outputImage.extent()),
+                        scale: 1.0,
+                        orientation: originalImage.imageOrientation
+                    )
                     dispatch_async(dispatch_get_main_queue(), { [unowned self] in
                         self.spinner.stopAnimating()
                         self.convertedImage = scaledImage
@@ -150,24 +154,28 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             let picker = UIImagePickerController()
             picker.sourceType = .Camera
-            picker.allowsEditing = true
+            picker.allowsEditing = false
             picker.delegate = self
             presentViewController(picker, animated: true, completion: nil)
-            
         }
     }
 
     // MARK: - UIImagePickerController Delegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        var image = info[UIImagePickerControllerEditedImage] as? UIImage
-        if image == nil {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if let cropRect = info[UIImagePickerControllerCropRect] as? NSValue {
+                println("crop: \(cropRect)")
+            }
+            self.image = originalImage
+            
+//            if let metadata = info[UIImagePickerControllerMediaMetadata] as? NSDictionary {
+//                println("metadata: \(metadata)")
+//            }
+            
         }
-//        if let metadata = info[UIImagePickerControllerMediaMetadata] as? NSDictionary {
-//            println("metadata: \(metadata)")
-//        }
-        self.image = image
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
