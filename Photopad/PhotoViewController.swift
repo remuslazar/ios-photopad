@@ -34,6 +34,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 let fileSizeString = NSByteCountFormatter.stringFromByteCount(Int64(imageData.length), countStyle: NSByteCountFormatterCountStyle.Binary)
                 title = "\(fileSizeString) \(Int(imageView.image!.size.width))x\(Int(imageView.image!.size.height))"
             }
+            scrollView.backgroundColor = newValue != nil ? .blackColor() : .clearColor()
         }
     }
     
