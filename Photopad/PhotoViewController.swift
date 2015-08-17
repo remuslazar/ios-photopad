@@ -90,7 +90,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if let originalImage = image {
             convertedImage = nil
             spinner.startAnimating()
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { [unowned self] in
+            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0), { [unowned self] in
                 let rect = AVMakeRectWithAspectRatioInsideRect(originalImage.size, CGRect(origin: CGPointZero, size: maxSize))
                 let scale = rect.size.width / originalImage.size.width
                 let image = CIImage(image: originalImage)
