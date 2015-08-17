@@ -38,12 +38,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
-//    func scrollViewDidZoom(scrollView: UIScrollView) {
-//        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
-//        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
-//        imageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX,
-//            y: scrollView.contentSize.height * 0.5 + offsetY)
-//    }
+
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
+        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
+        imageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX,
+            y: scrollView.contentSize.height * 0.5 + offsetY)
+    }
     
     private func fitImage() {
         if let image = convertedImage {
@@ -181,9 +182,6 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.addSubview(imageView)
-        if let view = scrollView as? CenteredImageScrollView {
-            view.imageView = imageView
-        }
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -29,7 +29,7 @@
                                     <action selector="exportImage:" destination="R5u-ug-e4E" eventType="valueChanged" id="FQQ-f9-3EK"/>
                                 </connections>
                             </segmentedControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWu-Yo-5tx" customClass="CenteredImageScrollView" customModule="Photopad" customModuleProvider="target">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWu-Yo-5tx">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Yo8-C7-def">
