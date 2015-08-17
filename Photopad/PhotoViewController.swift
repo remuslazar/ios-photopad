@@ -38,6 +38,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
+//    func scrollViewDidZoom(scrollView: UIScrollView) {
+//        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
+//        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
+//        imageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX,
+//            y: scrollView.contentSize.height * 0.5 + offsetY)
+//    }
+    
     private func fitImage() {
         if let image = convertedImage {
             let rect = AVMakeRectWithAspectRatioInsideRect(image.size, scrollView.bounds)
@@ -45,6 +52,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             scrollView.zoomScale = scale
             scrollView.minimumZoomScale = scale
             scrollView.maximumZoomScale = max(1.0, scale)
+//            scrollView.contentOffset = CGPoint(x: (rect.width - scrollView.bounds.width) / 2,
+//                y: (rect.height - scrollView.bounds.height) / 2)
         }
     }
     
@@ -156,9 +165,9 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if image == nil {
             image = info[UIImagePickerControllerOriginalImage] as? UIImage
         }
-        if let metadata = info[UIImagePickerControllerMediaMetadata] as? NSDictionary {
-            println("metadata: \(metadata)")
-        }
+//        if let metadata = info[UIImagePickerControllerMediaMetadata] as? NSDictionary {
+//            println("metadata: \(metadata)")
+//        }
         self.image = image
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -172,6 +181,9 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.addSubview(imageView)
+        if let view = scrollView as? CenteredImageScrollView {
+            view.imageView = imageView
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
