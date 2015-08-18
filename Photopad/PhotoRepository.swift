@@ -38,7 +38,9 @@ class PhotoRepository {
     }
     
     func saveLastImage(imageData: NSData) {
-        imageData.writeToURL(currentImageURL, atomically: true)
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+            imageData.writeToURL(currentImageURL, atomically: true)
+        }
     }
     
     func loadLastImage() -> NSData? {

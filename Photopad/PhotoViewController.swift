@@ -14,6 +14,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     // MARK: - public API
     var image: UIImage? {
         didSet {
+            convertedImage = image
+            centerImage()
             if imageSizeControl.selectedSegmentIndex != 0 {
                 imageSizeControl.selectedSegmentIndex = 0
             }
@@ -203,8 +205,6 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     dispatch_async(dispatch_get_main_queue()) {
                         self.spinner.stopAnimating()
                         self.image = UIImage(data: imageData)
-                        self.convertedImage = self.image
-                        self.centerImage()
                     }
                 }
             }
