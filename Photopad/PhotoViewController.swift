@@ -67,14 +67,10 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let actionSheet = UIAlertController(title: "Source Image", message: "Select Input Image Source", preferredStyle: .ActionSheet)
         
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            actionSheet.addAction(UIAlertAction(title: "Take Photo", style: .Default, handler: { [unowned self] (_) in
-                self.takePhoto(self)
-                }))
+            actionSheet.addAction(UIAlertAction(title: "Take Photo", style: .Default, handler: { (_) in self.takePhoto(self) }))
         }
         
-        actionSheet.addAction(UIAlertAction(title: "Camera Roll", style: .Default, handler: { [unowned self] (_) in
-            self.pickPhoto()
-            }))
+        actionSheet.addAction(UIAlertAction(title: "Camera Roll", style: .Default, handler: { (_) in self.pickPhoto() }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         presentViewController(actionSheet, animated: true, completion: nil)
 
@@ -104,7 +100,7 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if let originalImage = image {
             convertedImage = nil
             spinner.startAnimating()
-            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0), { [unowned self] in
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
                 let rect = AVMakeRectWithAspectRatioInsideRect(originalImage.size, CGRect(origin: CGPointZero, size: maxSize))
                 let scale = rect.size.width / originalImage.size.width
                 let image = CIImage(image: originalImage)
@@ -119,12 +115,12 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                         scale: 1.0,
                         orientation: originalImage.imageOrientation
                     )
-                    dispatch_async(dispatch_get_main_queue(), { [unowned self] in
+                    dispatch_async(dispatch_get_main_queue()) {
                         self.spinner.stopAnimating()
                         self.convertedImage = scaledImage
-                    })
+                    }
                 }
-            })
+            }
         }
     }
     
