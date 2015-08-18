@@ -38,12 +38,15 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
-
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    private func centerImage() {
         let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
         let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
         imageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX,
             y: scrollView.contentSize.height * 0.5 + offsetY)
+    }
+
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        centerImage()
     }
     
     private func fitImage() {
@@ -165,15 +168,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
         if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            if let cropRect = info[UIImagePickerControllerCropRect] as? NSValue {
-                println("crop: \(cropRect)")
-            }
             self.image = originalImage
-            
-//            if let metadata = info[UIImagePickerControllerMediaMetadata] as? NSDictionary {
-//                println("metadata: \(metadata)")
-//            }
-            
+            PhotoRepository.sharedInstance.saveLastImage(UIImageJPEGRepresentation(originalImage, 1.0))
         }
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -190,9 +186,29 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         scrollView.addSubview(imageView)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        // throw away resources we can recreate later
+        convertedImage = nil
+        image = nil
+    }
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        convertedImage = image
+        
+        if image == nil {
+            spinner.startAnimating()
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
+                if let imageData = PhotoRepository.sharedInstance.loadLastImage() {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.spinner.stopAnimating()
+                        self.image = UIImage(data: imageData)
+                        self.convertedImage = self.image
+                        self.centerImage()
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -202,7 +218,8 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        image = nil
+        convertedImage = nil
     }
     
 

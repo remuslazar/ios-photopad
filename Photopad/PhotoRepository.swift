@@ -15,6 +15,7 @@ class PhotoRepository {
     private struct Constants {
         static let NextImageNumberDefaultsKey = "PhotoRepository.LastFilenameNumber"
         static let FilenamePrefix = "IMG"
+        static let CurrentImageFilename = "current-image.jpg"
     }
     
     private let defaults = NSUserDefaults.standardUserDefaults()
@@ -31,6 +32,18 @@ class PhotoRepository {
         let fileManager = NSFileManager()
         return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as! NSURL
     }()
+    
+    var currentImageURL: NSURL {
+        return documentsURL.URLByAppendingPathComponent(Constants.CurrentImageFilename)
+    }
+    
+    func saveLastImage(imageData: NSData) {
+        imageData.writeToURL(currentImageURL, atomically: true)
+    }
+    
+    func loadLastImage() -> NSData? {
+        return NSData(contentsOfURL: currentImageURL)
+    }
     
     func saveImage(imageData: NSData, fileExtension: String = "jpg") {
         if let filename = nextImageFileName.stringByAppendingPathExtension(fileExtension) {
