@@ -29,12 +29,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
             imageView.sizeToFit()
             imageView.frame.origin = CGPointZero
             scrollView.contentSize = imageView.frame.size
-//            println("imageView frame: \(imageView.frame)")
             fitImage()
             title = ""
-            if let imageData = UIImageJPEGRepresentation(imageView.image, 0.75) {
-                let fileSizeString = NSByteCountFormatter.stringFromByteCount(Int64(imageData.length), countStyle: NSByteCountFormatterCountStyle.Binary)
-                title = "\(fileSizeString) \(Int(imageView.image!.size.width))x\(Int(imageView.image!.size.height))"
+            if  let image = imageView.image,
+                let imageData = UIImageJPEGRepresentation(image, 0.75)
+            {
+                    let fileSizeString = NSByteCountFormatter.stringFromByteCount(Int64(imageData.length), countStyle: NSByteCountFormatterCountStyle.Binary)
+                    title = "\(fileSizeString) \(Int(imageView.image!.size.width))x\(Int(imageView.image!.size.height))"
             }
             scrollView.backgroundColor = newValue != nil ? .blackColor() : .clearColor()
         }
@@ -104,14 +105,14 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 let rect = AVMakeRectWithAspectRatioInsideRect(originalImage.size, CGRect(origin: CGPointZero, size: maxSize))
                 let scale = rect.size.width / originalImage.size.width
                 let image = CIImage(image: originalImage)
-                let filter = CIFilter(name: "CILanczosScaleTransform")
+                let filter = CIFilter(name: "CILanczosScaleTransform")!
                 filter.setValue(image, forKey: "inputImage")
                 filter.setValue(scale, forKey: "inputScale")
                 filter.setValue(1.0, forKey: "inputAspectRatio")
                 if let outputImage = filter.valueForKey("outputImage") as? CIImage {
                     let context = CIContext(options: nil)
                     let scaledImage = UIImage(
-                        CGImage: context.createCGImage(outputImage, fromRect: outputImage.extent()),
+                        CGImage: context.createCGImage(outputImage, fromRect: outputImage.extent),
                         scale: 1.0,
                         orientation: originalImage.imageOrientation
                     )
@@ -163,11 +164,11 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
     // MARK: - UIImagePickerController Delegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.image = originalImage
-            PhotoRepository.sharedInstance.saveLastImage(UIImageJPEGRepresentation(originalImage, 1.0))
+            PhotoRepository.sharedInstance.saveLastImage(UIImageJPEGRepresentation(originalImage, 1.0)!)
         }
         
         dismissViewControllerAnimated(true, completion: nil)

@@ -30,7 +30,7 @@ class PhotoRepository {
     
     lazy var documentsURL: NSURL = {
         let fileManager = NSFileManager()
-        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as! NSURL
+        return fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     }()
     
     var currentImageURL: NSURL {
@@ -48,11 +48,8 @@ class PhotoRepository {
     }
     
     func saveImage(imageData: NSData, fileExtension: String = "jpg") {
-        if let filename = nextImageFileName.stringByAppendingPathExtension(fileExtension) {
-            println("filename: \(filename)")
-            let url = documentsURL.URLByAppendingPathComponent(filename)
-            imageData.writeToURL(url, atomically: true)
-        }
+        let url = documentsURL.URLByAppendingPathComponent(nextImageFileName).URLByAppendingPathExtension(fileExtension)
+        imageData.writeToURL(url, atomically: true)
     }
     
 }
